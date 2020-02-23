@@ -11,7 +11,7 @@
             color: green;
         }
 
-        .excess {
+        .exceeded {
             color: red;
         }
     </style>
@@ -19,10 +19,27 @@
 <body>
 <section>
     <h3><a href="index.html">Home</a></h3>
-    <hr/>
     <h2>Meals</h2>
+    <br/>
+    <form name="test" method="get" action="meals">
+        <p>
+            <label >От даты: </label>
+            <input type="date" id="localdatestart" name="localdatestart"/>
+            <label >  От времени: </label>
+            <input type="time" id="localtimestart" name="localtimestart"/>
+        </p>
+        <p>
+            <label >До даты: </label>
+            <input type="date" id="localdateend" name="localdateend"/>
+            <label >  До времени: </label>
+            <input type="time" id="localtimeend" name="localtimeend"/>
+        </p>
+        <p>
+            <button type="submit">Отправить</button>
+        </p>
+    </form>
     <a href="meals?action=create">Add Meal</a>
-    <br><br>
+    <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
@@ -34,8 +51,8 @@
         </tr>
         </thead>
         <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
-            <tr class="${meal.excess ? 'excess' : 'normal'}">
+            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealTo"/>
+            <tr class="${meal.excess ? 'exceeded' : 'normal'}">
                 <td>
                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
                         <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
