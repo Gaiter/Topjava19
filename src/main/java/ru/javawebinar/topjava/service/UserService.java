@@ -55,4 +55,11 @@ public class UserService {
     public User getWithMeals(int id) {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
     }
+
+    @CacheEvict(value = "users", allEntries = true)
+    public void changeEnabled(Integer id, Boolean enabled) {
+        User user = get(id);
+        user.setEnabled(enabled);
+        repository.save(user);
+    }
 }

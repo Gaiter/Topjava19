@@ -1,3 +1,17 @@
+
+function changeEnabled(chbox, id) {
+    var enabled = chbox.is(':checked');
+    chbox.parent().parent().css("color",enabled ? "green" : "red");
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "enabled",
+        data: {id: id, enabled: enabled},
+        success: function () {
+            successNoty(enabled ? "Enable" : "Disable");
+        }
+    });
+}
+
 // $(document).ready(function () {
 $(function () {
     makeEditable({
